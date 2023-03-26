@@ -1,5 +1,9 @@
 #ifndef LISTA_H_INCLUDED
 #define LISTA_H_INCLUDED
+#include <iostream>
+
+using namespace std;
+
 
 template<typename T>
 struct nodo
@@ -83,7 +87,7 @@ int elementosAssociados(Lista<T> lista, string valor)
 	else
 	{
 		cout << "elemento nao encontrado" << endl;
-		return;
+		return 0;
 	}
 }
 
