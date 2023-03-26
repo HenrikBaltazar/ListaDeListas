@@ -32,6 +32,6 @@ Gerar uma lista de listas com todas as disciplinas e o número de alunos que a c
 > TRABALHO EM EQUIPE DE 3 PESSOAS
 > ENVIAR ARQUIVO COMPACTADO COM O NOME DA EQUIPE.
 
-:::image type="content" source="img/l1.png" alt-text="Lista 01 (07 pontos)":::
+![Lista 01 (07 pontos)](img/l1.png)
 
-:::image type="content" source="img/l2.png" alt-text="Lista 02 (03 pontos)":::
+![Lista 02 (03 pontos)](img/l2.png)
