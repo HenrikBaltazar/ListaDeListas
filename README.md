@@ -13,6 +13,20 @@ mostrar uma lista e mostrar os elementos associados a determinado elemento da li
 A lista de listas deverá ser implementada usando alocação dinâmica de memória (conforme figura
 seguinte) e os elementos da estrutura de dados deverão ser de quaisquer tipos (genérico, portanto)
 
+- [X] criar listas
+- [X] destruir listas
+- [X] verificar se a lista esta vazia
+- [X] recuperar o numero de elementos da lista
+- [X] recuperar o numero de elementos associados a determinado elemento da lista
+- [X] verificar se um elemento existe na lista
+- [X] verificar se um elemento associado a determinado elemento existe na lista
+- [X] inserir um elemento na lista
+- [X] inserir um elemento associado a determinado elemento da lista
+- [X] retirar um elemento da lista
+- [X] retirar um elemento associado a determinado elemento da lista
+- [X] mostrar uma lista
+- [X] mostar os elementos associados a determinado elemento da lista
+
 ## Aplicação
 (3,0 pontos) Construa um programa que, fazendo uso da lista de listas implementada, represente um
 problema que envolva alunos e suas disciplinas. Isto é, o programa deverá permitir fazer a inserção de

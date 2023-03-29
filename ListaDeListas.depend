@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1679831437 source:/home/rik/pessoal/univali/2023_1/estrutura/T1/ListaDeListas/main.cpp
+	<iostream>
+	"Lista.h"
+
+1679834086 /home/rik/pessoal/univali/2023_1/estrutura/T1/ListaDeListas/Lista.h
+	<iostream>
+
