@@ -65,23 +65,28 @@ void insereLista(ListaDeListas<T> &listaDeListas, T valor, int posicao)
 }
 
 template <typename T>
-void insereNodo(Lista<T> &lista, T valor, int posicao)
+void insereNodo(ListaDeListas<T> &ListaDeListas, T lista, T valor, int posicao)
 {
+	if(!existeLista(ListaDeListas, lista))
+		throw "LISTA NAO EXISTE";
+	Lista<T> auxLista = ListaDeListas.inicioLista;
+	while (auxLista->valorLista != lista)
+		auxLista = auxLista->proximaLista;
 	if(posicao < 1 || posicao > l1.cardinal +1)
 		throw "POSICAO INVALIDA";
 	Nodo<T>* q = new Nodo<T>;
 	q->valorNodo = valor;
 	q->proximoNodo = NULL;
-	if(lista.inicio == NULL) //Lista esta vazia
-		lista.inicio = q;
+	if(auxLista.inicio == NULL) //Lista esta vazia
+		auxLista.inicio = q;
 	else{                 //Lista nao esta vazia
 		if (posicao == 1) //vai inserir no primeiro da lista
 		{
-			q->proximoNodo = lista.inicio; //o proximo do novo elemento sera o antigo primeiro
-			lista.inicio = q; //agora o elemento eh o primeiro
+			q->proximoNodo = auxLlista.inicio; //o proximo do novo elemento sera o antigo primeiro
+			auxLista.inicio = q; //agora o elemento eh o primeiro
 		}
 		else{ //nao eh no primeiro
-			Nodo<T>* p = lista.inicio;
+			Nodo<T>* p = auxLista.inicio;
 			int contador = 1;
 			while (contador!=posicao -1){ //leva o ponteiro ate o nodo anterior para atualizar o seu proximo
 				p = p->proximoNodo;
@@ -91,7 +96,7 @@ void insereNodo(Lista<T> &lista, T valor, int posicao)
 			p->proximoNodo = q; //o nodo anterior recebe a referencia do novo nodo
 		}
 	}
-	lista.cardinalidadeNodos++;
+	auxLista.cardinalidadeNodos++;
 }
 
 template<typename T>
@@ -143,8 +148,9 @@ int recuperaQuantidadeLista(ListaDeListas<T> listaDeListas){
 }
 
 template <typename T>
-int recuperaQuantidadeNodos(Lista<T> lista){
-	return lista.cardinalidadeNodos;
+int recuperaQuantidadeNodos(ListaDeListas<T> ListaDeListas){
+	Lista<T> Lista = ListaDeListas.inicioLista;
+	return Lista.cardinalidadeNodos;
 }
 
 template <typename T>
