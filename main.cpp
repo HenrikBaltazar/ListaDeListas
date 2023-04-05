@@ -21,7 +21,7 @@ int main()
             cout << "     4 - Remover materia de um aluno     " << endl;
             cout << "     5 - Mostrar todos os alunos e suas materias        " << endl;
             cout << "     6 - Mostrar materias de um aluno    " << endl;
-            cout << "     7 - Quantidade de alunos associadas a um aluno    " << endl;
+            cout << "     7 - Quantidade de alunos associadas a uma materia    " << endl;
             cout << "     0 - Sair              " << endl;
             cin >> opcao;
             getchar();
@@ -36,11 +36,19 @@ int main()
             cin >> posicao;
             if (ehVazia(ListaAlunos))
             {
-                criaListaDeListas(ListaAlunos);
-                insereLista(ListaAlunos, nomealuno, posicao);
+                try{
+                    criaListaDeListas(ListaAlunos);
+                    insereLista(ListaAlunos, nomealuno, posicao);
+                }catch(const char* e) {
+                    cout << "Ocorreu uma exceção: " << e << endl;
+                }
             }
             else
-                insereLista(ListaAlunos, nomealuno, posicao);
+                try{
+                    insereLista(ListaAlunos, nomealuno, posicao);
+                }catch(const char* e) {
+                    cout << "Ocorreu uma exceção: " << e << endl;
+                }
             getchar();
             system("clear");
             break;
@@ -57,19 +65,29 @@ int main()
                 cin >> nomemateria;
                 cout << "Qual posicao deseja inserir " << nomemateria << ": ";
                 cin >> posicao;
-                insereNodo(ListaAlunos, nomealuno, nomemateria, posicao);
+                try{
+                    insereNodo(ListaAlunos, nomealuno, nomemateria, posicao);
+                }catch(const char* e) {
+                    cout << "Ocorreu uma exceção: " << e << endl;
+                }
             }
             getchar();
             system("clear");
             break;
         case 3:
+            try{
             cout << "Qual o nome deseja excluir?: ";
             cin >> nomealuno;
+            
             removeLista(ListaAlunos, nomealuno);
+            }catch(const char* e) {
+                cout << "Ocorreu uma exceção: " << e << endl;
+            }
             getchar();
             system("clear");
             break;
         case 4:
+            mostraListas(ListaAlunos);
             cout << "Qual aluno deseja que a materia seja removida?: ";
             cin >> nomealuno;
 
@@ -78,11 +96,15 @@ int main()
                 cout << "Aluno nao encontrado" << endl;
             else
             {
-                mostraListas(ListaAlunos);
+                mostraNodosDeUmaLista(ListaAlunos,nomealuno);
                 cout << endl;
                 cout << "Qual materia deseja remover?: ";
                 cin >> nomemateria;
+                try{
                 removeNodo(ListaAlunos, nomealuno, nomemateria);
+                }catch(const char* e) {
+                    cout << "Ocorreu uma exceção: " << e << endl;
+                }
             }
             getchar();
             system("clear");
@@ -105,6 +127,7 @@ int main()
             system("clear");
             break;
         case 7:
+            mostraSomatorioDeNodos(ListaAlunos);
             getchar();
             system("clear");
             break;
