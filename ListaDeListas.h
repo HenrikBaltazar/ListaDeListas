@@ -69,24 +69,24 @@ void insereNodo(ListaDeListas<T,T2> &ListaDeListas, T lista, T valor, int posica
 {
 	if(!existeLista(ListaDeListas, lista))
 		throw "LISTA NAO EXISTE";
-	Lista<T,T2> auxLista = ListaDeListas.inicioLista;
+	Lista<T,T2>* auxLista = ListaDeListas.inicioLista;
 	while (auxLista->valorLista != lista)
 		auxLista = auxLista->proximaLista;
-	if(posicao < 1 || posicao > l1.cardinal +1)
+	if(posicao < 1 || posicao > ListaDeListas.cardinalidadeListas +1)
 		throw "POSICAO INVALIDA";
 	Nodo<T>* q = new Nodo<T>;
 	q->valorNodo = valor;
 	q->proximoNodo = NULL;
-	if(auxLista.inicio == NULL) //Lista esta vazia
-		auxLista.inicio = q;
+	if(auxLista->inicio == NULL) //Lista esta vazia
+		auxLista->inicio = q;
 	else{                 //Lista nao esta vazia
 		if (posicao == 1) //vai inserir no primeiro da lista
 		{
-			q->proximoNodo = auxLlista.inicio; //o proximo do novo elemento sera o antigo primeiro
-			auxLista.inicio = q; //agora o elemento eh o primeiro
+			q->proximoNodo = auxLista->inicio; //o proximo do novo elemento sera o antigo primeiro
+			auxLista->inicio = q; //agora o elemento eh o primeiro
 		}
 		else{ //nao eh no primeiro
-			Nodo<T>* p = auxLista.inicio;
+			Nodo<T>* p = auxLista->inicio;
 			int contador = 1;
 			while (contador!=posicao -1){ //leva o ponteiro ate o nodo anterior para atualizar o seu proximo
 				p = p->proximoNodo;
@@ -96,7 +96,7 @@ void insereNodo(ListaDeListas<T,T2> &ListaDeListas, T lista, T valor, int posica
 			p->proximoNodo = q; //o nodo anterior recebe a referencia do novo nodo
 		}
 	}
-	auxLista.cardinalidadeNodos++;
+	auxLista->cardinalidadeNodos++;
 }
 
 template<typename T, typename T2>
@@ -115,16 +115,16 @@ void destroiListaDeListas(ListaDeListas<T,T2> &listaDeListas)
 		}
 		listaDeListas.inicioLista = auxLista->proximaLista;
 		delete auxLista;
-		auxLista = listaDelistas.inicioLista;
+		auxLista = listaDeListas->inicioLista;
 	}
 	listaDeListas.cardinalidadeListas = 0;
 }
 
 template <typename T, typename T2>
-bool existeLista(ListaDeListas<T,T2> ListaDeListas, T valor){
-	Lista<T,T2> *p = ListaDeListas.inicioLista;
+bool existeLista(ListaDeListas<T,T2> lista, T valor){
+	Lista<T,T2>* p = lista.inicioLista;
 	while( p != NULL){
-		if(p.valorLista == valor)
+		if(p->valorLista == valor)
 			return true;
 		p = p->proximaLista;
 	}
@@ -132,10 +132,10 @@ bool existeLista(ListaDeListas<T,T2> ListaDeListas, T valor){
 }
 
 template <typename T, typename T2>
-bool existeNodo(Lista<T,T2> Lista, T valor){
-	Nodo<T> *p = Lista.inicioNodo;
+bool existeNodo(Lista<T,T2> lista, T valor){
+	Nodo<T>* p = lista.inicio;
 	while( p != NULL){
-		if(p.valorNodo == valor)
+		if(p->valorNodo == valor)
 			return true;
 		p = p->proximoNodo;
 	}
@@ -160,9 +160,9 @@ bool ehVazia (ListaDeListas<T,T2> ListaDeListas)
 }
 
 template <typename T, typename T2>
-void mostraListas (ListaDeListas<T,T2> ListaDeListas)
+void mostraListas (ListaDeListas<T,T2> listaDeListas)
 {
-	for (Lista<T,T2>* p = ListaDeListas.inicio; p!= NULL; p=p->proximaLista)
+	for (Lista<T,T2>* p = listaDeListas.inicioLista; p!= NULL; p=p->proximaLista)
 		cout << p->valorLista << " ";
 	cout << endl;
 }
@@ -178,17 +178,30 @@ void mostraListasNodos (ListaDeListas<T,T2> ListaDeListas)
 	}
 }
 
+template <typename T, typename T2>
+void mostraNodosDeUmaLista (ListaDeListas<T,T2> ListaDeListas, T valor)
+{
+	for (Lista<T,T2>* p = ListaDeListas.inicioLista; p!= NULL; p=p->proximaLista){
+		if( p->valorLista == valor){
+			cout << p->valorLista << " ";
+			for (Nodo<T>* q = p->inicio; q!= NULL; q=q->proximoNodo)
+				cout << q->valorNodo << " ";
+			cout << endl;
+		}
+	}
+}
+
 template<typename T,typename T2>
 void removeLista(ListaDeListas<T,T2> &listaDeListas, T lista)
 {
 	if(listaDeListas.cardinalidadeListas == 0)
-		throw "UNDERFLOW"
+		throw "UNDERFLOW";
 	if(existeLista(listaDeListas, lista))
         throw "LISTA NAO EXISTE";
 	Lista<T,T2>* auxLista = listaDeListas.inicioLista;
 	if (auxLista->valorLista == lista)		//primeiro elemento Lista eh a list a ser removida
 	{
-		Nodo<T> auxNodo = auxLista->inicio;
+		Nodo<T>* auxNodo = auxLista->inicio;
 		while (auxNodo != NULL)
 		{
 			auxLista->inicio = auxNodo->proximoNodo;
@@ -207,7 +220,7 @@ void removeLista(ListaDeListas<T,T2> &listaDeListas, T lista)
 		antLista = auxLista;
 		auxLista = auxLista->proximaLista;
 	}
-	Nodo<T> auxNodo = auxLista->inicio;
+	Nodo<T>* auxNodo = auxLista->inicio;
 	while (auxNodo != NULL)
 	{
 		auxLista->inicio = auxNodo->proximoNodo;
@@ -221,9 +234,9 @@ void removeLista(ListaDeListas<T,T2> &listaDeListas, T lista)
 template<typename T, typename T2>
 void removeNodo(ListaDeListas<T,T2> &listaDeListas, T lista, T nodo){
 	Lista<T,T2>* auxLista = listaDeListas.inicioLista;
-	if(auxLista.cardinalidadeNodos == 0)
-		throw "UNDERFLOW"
-	if(existeNodo(auxLista, nodo))
+	if(auxLista->cardinalidadeNodos == 0)
+		throw "UNDERFLOW";
+	if(existeNodo(*auxLista, nodo))
         throw "NODO NAO EXISTE";
 	while (auxLista->valorLista != lista)
 		auxLista = auxLista->proximaLista;
@@ -239,10 +252,14 @@ void removeNodo(ListaDeListas<T,T2> &listaDeListas, T lista, T nodo){
 	while (auxNodo->valorNodo != nodo)
 	{
 		antNodo = auxNodo;
-		auxnodo = auxNodo->proximoNodo;
+		auxNodo = auxNodo->proximoNodo;
 	}
 	antNodo->proximoNodo = auxNodo->proximoNodo;
 	delete auxNodo;
+}
+
+void mostraSomatorioDeNodos(ListaDeListas<string,string> lista){
+	ListaDeListas<string, int> somatorio;
 }
 
 #endif // LISTA_H_INCLUDED

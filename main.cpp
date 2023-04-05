@@ -8,7 +8,7 @@ int main()
     int opcao, posicao;
     string nomealuno, nomemateria;
     bool achou = false;
-    ListaDeListas<string> ListaAlunos, ListaQuantidadeDeMaterias;
+    ListaDeListas<string, string> ListaAlunos;
 
     do
     {
@@ -32,15 +32,15 @@ int main()
         case 1:
             cout << "Qual o nome deseja inserir?: ";
             cin >> nomealuno;
-            cout << "Qual posição deseja inserir " << nomealuno << ": ";
+            cout << "Qual posicao deseja inserir " << nomealuno << ": ";
             cin >> posicao;
-            if (ehvazia(ListaAlunos == true))
+            if (ehVazia(ListaAlunos))
             {
-                cria(ListaAlunos)
-                insere(ListaAlunos, nomealuno, posicao);
+                criaListaDeListas(ListaAlunos);
+                insereLista(ListaAlunos, nomealuno, posicao);
             }
             else
-                insere(ListaAlunos, nomealuno, posicao);
+                insereLista(ListaAlunos, nomealuno, posicao);
             getchar();
             system("clear");
             break;
@@ -48,23 +48,24 @@ int main()
             cout << "Qual o nome do aluno que deseja inserir a materia?: ";
             cin >> nomealuno;
             // eh vazia
-            achou = existeelemento(ListaAluno, nomealuno);
+            achou = existeLista(ListaAlunos, nomealuno);
             if (achou == false)
-                cout << "Aluno não encontrado" << endl;
+                cout << "Aluno nao encontrado" << endl;
             else
+            {
                 cout << "Qual materia deseja inserir?: ";
-            cin >> nomemateria;
-            cout << "Qual posição deseja inserir " << nomemateria << ": ";
-            cin >> posicao;
-            insere(ListaMaterias, nomemateria, posicao);
+                cin >> nomemateria;
+                cout << "Qual posicao deseja inserir " << nomemateria << ": ";
+                cin >> posicao;
+                insereNodo(ListaAlunos, nomealuno, nomemateria, posicao);
+            }
             getchar();
             system("clear");
             break;
         case 3:
             cout << "Qual o nome deseja excluir?: ";
             cin >> nomealuno;
-            removealuno(ListaAluno, nomealuno);
-
+            removeLista(ListaAlunos, nomealuno);
             getchar();
             system("clear");
             break;
@@ -72,20 +73,22 @@ int main()
             cout << "Qual aluno deseja que a materia seja removida?: ";
             cin >> nomealuno;
 
-            achou = existeelemento(ListaAluno, nomealuno);
+            achou = existeLista(ListaAlunos, nomealuno);
             if (achou == false)
-                cout << "Aluno não encontrado" << endl;
+                cout << "Aluno nao encontrado" << endl;
             else
-                exibemateriasaluno(ListaAluno);
-            cout << endl;
-            cout << "Qual materia deseja remover?: ";
-            cin >> nomemateria;
-            removemateria(ListaAluno, nomemateria);
+            {
+                mostraListas(ListaAlunos);
+                cout << endl;
+                cout << "Qual materia deseja remover?: ";
+                cin >> nomemateria;
+                removeNodo(ListaAlunos, nomealuno, nomemateria);
+            }
             getchar();
             system("clear");
             break;
         case 5:
-            exibeAlunosMaterias(ListaAlunos);
+            mostraListasNodos(ListaAlunos);
             getchar();
             system("clear");
             break;
@@ -93,11 +96,11 @@ int main()
             cout << "Qual aluno deseja que as materias sejam exibidas?: ";
             cin >> nomealuno;
 
-            achou = existeelemento(ListaAluno, nomealuno);
+            achou = existeLista(ListaAlunos, nomealuno);
             if (achou == false)
-                cout << "Aluno não encontrado" << endl;
+                cout << "Aluno nao encontrado" << endl;
             else
-                exibematerias(ListaAlunos, nomealuno);
+                mostraNodosDeUmaLista(ListaAlunos, nomealuno);
             getchar();
             system("clear");
             break;
