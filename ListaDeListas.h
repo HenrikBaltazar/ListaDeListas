@@ -264,6 +264,8 @@ void mostraSomatorioDeNodos(ListaDeListas<string, string> lista) {
 	ListaDeListas<string, int> somatorio;
 	criaListaDeListas(somatorio);
 	Lista<string, string>* aux = lista.inicioLista;
+	if (aux == NULL)
+		return;
 	Nodo<string>* auxNodo = aux->inicio;
 	while (aux != NULL)
 	{
@@ -271,7 +273,7 @@ void mostraSomatorioDeNodos(ListaDeListas<string, string> lista) {
 		while (auxNodo != NULL) {
 			if (!existeLista(somatorio, auxNodo->valorNodo)) {
 				insereLista(somatorio, auxNodo->valorNodo, somatorio.cardinalidadeListas + 1);
-				insereNodo(somatorio, aux->valorLista, 1, 1);
+				insereNodo(somatorio, auxNodo->valorNodo, 1, 1);
 				//varre a lista de alunos pra somar a quantidade de materias e alterar o valor do nodo pelo somatorio
 			}
 			else {

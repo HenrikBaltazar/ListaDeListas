@@ -128,6 +128,7 @@ int main()
             else
                 mostraNodosDeUmaLista(ListaAlunos, nomealuno);
             getchar();
+            getchar();
             system("clear");
             break;
         case 7:
