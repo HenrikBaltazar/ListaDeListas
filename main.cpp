@@ -9,7 +9,7 @@ int main()
     string nomealuno, nomemateria;
     bool achou = false;
     ListaDeListas<string, string> ListaAlunos;
-
+    criaListaDeListas(ListaAlunos);
     do
     {
         do
@@ -36,19 +36,20 @@ int main()
             cin >> posicao;
             if (ehVazia(ListaAlunos))
             {
-                try{
-                    criaListaDeListas(ListaAlunos);
+                try {
                     insereLista(ListaAlunos, nomealuno, posicao);
-                }catch(const char* e) {
+                }
+                catch (const char* e) {
                     cout << "Ocorreu uma exceção: " << e << endl;
                 }
             }
             else
-                try{
-                    insereLista(ListaAlunos, nomealuno, posicao);
-                }catch(const char* e) {
-                    cout << "Ocorreu uma exceção: " << e << endl;
-                }
+                try {
+                insereLista(ListaAlunos, nomealuno, posicao);
+            }
+            catch (const char* e) {
+                cout << "Ocorreu uma exceção: " << e << endl;
+            }
             getchar();
             system("clear");
             break;
@@ -65,9 +66,10 @@ int main()
                 cin >> nomemateria;
                 cout << "Qual posicao deseja inserir " << nomemateria << ": ";
                 cin >> posicao;
-                try{
+                try {
                     insereNodo(ListaAlunos, nomealuno, nomemateria, posicao);
-                }catch(const char* e) {
+                }
+                catch (const char* e) {
                     cout << "Ocorreu uma exceção: " << e << endl;
                 }
             }
@@ -75,12 +77,13 @@ int main()
             system("clear");
             break;
         case 3:
-            try{
-            cout << "Qual o nome deseja excluir?: ";
-            cin >> nomealuno;
-            
-            removeLista(ListaAlunos, nomealuno);
-            }catch(const char* e) {
+            try {
+                cout << "Qual o nome deseja excluir?: ";
+                cin >> nomealuno;
+
+                removeLista(ListaAlunos, nomealuno);
+            }
+            catch (const char* e) {
                 cout << "Ocorreu uma exceção: " << e << endl;
             }
             getchar();
@@ -96,13 +99,14 @@ int main()
                 cout << "Aluno nao encontrado" << endl;
             else
             {
-                mostraNodosDeUmaLista(ListaAlunos,nomealuno);
+                mostraNodosDeUmaLista(ListaAlunos, nomealuno);
                 cout << endl;
                 cout << "Qual materia deseja remover?: ";
                 cin >> nomemateria;
-                try{
-                removeNodo(ListaAlunos, nomealuno, nomemateria);
-                }catch(const char* e) {
+                try {
+                    removeNodo(ListaAlunos, nomealuno, nomemateria);
+                }
+                catch (const char* e) {
                     cout << "Ocorreu uma exceção: " << e << endl;
                 }
             }
